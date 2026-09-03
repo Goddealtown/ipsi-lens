@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>이용 안내 · 면책 — 대입네비</title>
+<meta name="description" content="대입네비의 데이터 출처, 진단 방법론, 이용 시 유의사항과 면책, 개인정보 처리 안내.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300..700&family=Noto+Sans+KR:wght@300..700&family=JetBrains+Mono:wght@400&display=swap">
+<style>
+:root{
+  --ink:#000; --canvas:#fff; --inverse-ink:#fff;
+  --hairline:#e6e6e6; --hairline-soft:#f1f1f1; --soft:#f7f7f5;
+  --lime:#dceeb1; --lilac:#c5b0f4; --cream:#f4ecd6; --mint:#c8e6cd;
+  --success:#1ea64a;
+  --sans:'Inter','Noto Sans KR','SF Pro Display',system-ui,helvetica,sans-serif;
+  --mono:'JetBrains Mono','SF Mono',menlo,monospace;
+}
+*{box-sizing:border-box;margin:0}
+body{background:var(--canvas);color:var(--ink);font-family:var(--sans);
+  font-size:18px;font-weight:320;line-height:1.5;letter-spacing:-0.26px;
+  font-feature-settings:'kern';-webkit-font-smoothing:antialiased;word-break:keep-all}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:880px;margin:0 auto;padding:0 48px}
+:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+b{font-weight:540}
+.eyebrow{font-family:var(--mono);font-size:15px;letter-spacing:0.54px;text-transform:uppercase}
+.caption{font-family:var(--mono);font-size:12px;letter-spacing:0.6px;text-transform:uppercase}
+.pill{display:inline-flex;align-items:center;font-family:var(--sans);font-size:16px;
+  font-weight:480;line-height:1.4;letter-spacing:-0.1px;border-radius:50px;
+  padding:8px 18px;background:var(--ink);color:var(--inverse-ink)}
+.top-nav{position:sticky;top:0;background:var(--canvas);z-index:10;height:64px;
+  border-bottom:1px solid var(--hairline-soft)}
+.top-nav .bar{max-width:1280px;margin:0 auto;padding:0 48px;height:100%;
+  display:flex;align-items:center;justify-content:space-between}
+.logo{font-size:22px;font-weight:540;letter-spacing:-0.02em;display:flex;align-items:center;gap:10px}
+.logo .mark{width:22px;height:22px;border-radius:6px;background:var(--lilac);position:relative}
+.logo .mark::after{content:'';position:absolute;inset:5px;border-radius:3px;background:var(--ink)}
+header.page{padding:96px 0 48px}
+header.page h1{font-size:clamp(40px,6vw,64px);font-weight:340;line-height:1.1;
+  letter-spacing:-0.015em;margin-top:24px}
+header.page .lede{font-size:20px;font-weight:330;letter-spacing:-0.14px;margin-top:24px;max-width:600px}
+section{padding:48px 0;border-top:1px solid var(--hairline)}
+section h2{font-size:26px;font-weight:540;line-height:1.35;letter-spacing:-0.26px;
+  display:flex;gap:18px;align-items:baseline}
+section h2 .no{font-family:var(--mono);font-size:14px;letter-spacing:.6px;font-weight:400}
+section p, section li{font-size:17px;font-weight:330;letter-spacing:-0.14px;max-width:680px}
+section p{margin-top:16px}
+section ul{margin-top:16px;padding-left:0;list-style:none;display:flex;flex-direction:column;gap:12px}
+section li{display:flex;gap:12px;align-items:baseline}
+section li::before{content:'—';flex:none}
+.callout{border-radius:8px;padding:24px 28px;margin-top:24px;max-width:680px}
+.callout .caption{display:block;margin-bottom:10px}
+.callout p{margin:0;font-size:16px}
+.c-lime{background:var(--lime)}
+.c-mint{background:var(--mint)}
+footer{border-top:1px solid var(--hairline);margin-top:64px;padding:40px 0}
+footer .bar{max-width:1280px;margin:0 auto;padding:0 48px;display:flex;
+  justify-content:space-between;flex-wrap:wrap;gap:12px}
+footer span, footer a{font-family:var(--mono);font-size:11px;letter-spacing:.6px;text-transform:uppercase}
+footer a{text-decoration:underline;text-underline-offset:3px}
+@media(max-width:768px){.wrap{padding:0 24px}.top-nav .bar{padding:0 24px}footer .bar{padding:0 24px}}
+</style>
+</head>
+<body>
+
+<div class="top-nav">
+  <div class="bar">
+    <a class="logo" href="./index.html"><span class="mark"></span>대입네비</a>
+    <a class="pill" href="./app" data-app-link>무료로 진단받기</a>
+  </div>
+</div>
+
+<div class="wrap">
+  <header class="page">
+    <span class="eyebrow">Guide &amp; Disclaimer</span>
+    <h1>이용 안내 · 면책</h1>
+    <p class="lede">대입네비가 어떤 데이터로, 어떻게 진단하는지 —
+    그리고 결과를 어떻게 읽어야 하는지 정직하게 안내합니다.</p>
+  </header>
+
+  <section>
+    <h2><span class="no">01</span>데이터는 어디서 오나요</h2>
+    <p>모든 합격선·경쟁률·수능최저 기준은 <b>각 대학 입학처가 공식 발표한
+    입시결과와 모집요강</b>에서 수집했습니다. 전국 62개 대학, 16,000여 건의
+    전형×모집단위 데이터를 표준화해 담았으며, 모든 수치는 원문(PDF·게시물)까지
+    역추적할 수 있게 출처를 기록합니다.</p>
+    <p>어디가(adiga.kr)·대학알리미 등 수집이 허용되지 않는 제3자 사이트는
+    사용하지 않습니다. 그 결과 어디가에만 데이터를 공개하는 일부 대학(성균관대 등
+    12곳)은 수록돼 있지 않습니다 — <b>추정치로 채우지 않는 것이 원칙</b>입니다.</p>
+  </section>
+
+  <section>
+    <h2><span class="no">02</span>판정은 어떻게 내리나요</h2>
+    <p>입력한 내신 등급을 각 대학 <b>최종등록자 합격선</b>(대학별로 50%컷·70%컷·80%컷
+    또는 평균)과 대조해 격차에 따라 분류합니다.</p>
+    <ul>
+      <li><b>안정</b> — 작년 합격선이 내 성적보다 0.4등급 이상 낮았던 곳</li>
+      <li><b>적정</b> — 작년 합격선이 내 성적과 비슷한 곳(+0.05~0.4등급)</li>
+      <li><b>도전</b> — 작년 합격선이 다소 높았던 곳(0.35등급 이내)</li>
+      <li><b>상향</b> — 작년 합격선이 크게 높았던 곳</li>
+    </ul>
+    <p>지역인재 전형의 권역 자격, 여자대학, 수능최저학력기준(요강 원문 확인분)은
+    자동으로 반영됩니다. 기준이 복잡해 자동 판정이 어려운 전형은 감추지 않고
+    '수동 확인 필요'로 따로 표시합니다.</p>
+  </section>
+
+  <section>
+    <h2><span class="no">03</span>얼마나 믿을 수 있나요</h2>
+    <p>2025학년도 합격선으로 내린 판정이 2026학년도 실제 결과에서 유지됐는지
+    같은 전형·모집단위 <b>1,797쌍 × 내신 시나리오 5종</b>으로 검증(백테스트)했습니다.</p>
+    <div class="callout c-lime">
+      <span class="caption">Backtest result</span>
+      <p>이듬해 합격권 유지율 — 안정 <b>89%</b> · 적정 <b>75%</b> · 도전 <b>33%</b> · 상향 <b>13%</b></p>
+    </div>
+    <p>합격선은 해마다 움직입니다(연간 변동 표준편차 약 ±0.7등급).
+    <b>'안정'은 높은 확률이지 보장이 아닙니다.</b> 변동이 특히 컸던 전형은
+    결과 카드에 ⚡ 표시로 따로 경고합니다.</p>
+  </section>
+
+  <section>
+    <h2><span class="no">04</span>이런 한계가 있습니다</h2>
+    <ul>
+      <li>진단은 <b>과거 데이터 기반 참고 자료</b>입니다. 올해의 모집인원 변화, 전형 개편,
+      지원 경향 변화는 반영되지 않을 수 있습니다.</li>
+      <li>학생부종합전형은 서류·면접이 당락을 좌우합니다. 내신 합격선 대조는
+      출발점일 뿐, 종합 판단을 대신하지 않습니다.</li>
+      <li>대학마다 합격선 산출 기준(컷 지점·반영 교과)이 달라 대학 간 단순 비교에는
+      한계가 있습니다. 카드에 기준을 함께 표기합니다.</li>
+      <li>정시 판정은 등급→백분위 근사를 사용하므로 오차가 있습니다.
+      실제 백분위 성적표 기준으로 다시 확인하세요.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2><span class="no">05</span>면책 조항</h2>
+    <p>대입네비의 진단 결과는 정보 제공 목적의 참고 자료이며, 특정 대학·전형의
+    합격을 보장하거나 지원을 권유하는 것이 아닙니다. <b>실제 지원 여부의 판단과
+    책임은 이용자 본인에게 있으며</b>, 지원 전 반드시 해당 대학의 당해 연도
+    모집요강 원문을 확인하시기 바랍니다. 수록된 데이터의 원 출처는 각 대학
+    입학처이며, 대입네비는 대학 및 한국대학교육협의회와 무관한 독립 서비스입니다.</p>
+  </section>
+
+  <section>
+    <h2><span class="no">06</span>개인정보</h2>
+    <div class="callout c-mint">
+      <span class="caption">Privacy</span>
+      <p>무료 공개 기간 동안 <b>회원가입을 받지 않으며</b>, 입력한 성적 정보는
+      진단 계산에만 사용됩니다. 이름·연락처 등 개인 식별 정보를 요구하지 않고,
+      결제 정보를 수집하지 않습니다.</p>
+    </div>
+  </section>
+
+</div>
+
+<footer>
+  <div class="bar">
+    <span>© 2026 대입네비 · Data: official university admissions</span>
+    <a href="./index.html">Home</a>
+  </div>
+</footer>
+
+</body>
+</html>

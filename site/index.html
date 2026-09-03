@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>대입네비 — 공식 입시결과로 진단하는 대입 내비게이션</title>
+<meta name="description" content="전국 62개 대학이 직접 발표한 16,000여 건의 입시결과로 수시·정시 지원선을 진단합니다. 백테스트로 검증된 판정, 지금 무료.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300..700&family=Noto+Sans+KR:wght@300..700&family=JetBrains+Mono:wght@400&display=swap">
+<style>
+/* ==== Figma marketing design system (DESIGN-figma.md) ==== */
+:root{
+  --ink:#000; --canvas:#fff; --inverse:#000; --inverse-ink:#fff;
+  --hairline:#e6e6e6; --hairline-soft:#f1f1f1; --soft:#f7f7f5;
+  --lime:#dceeb1; --lilac:#c5b0f4; --cream:#f4ecd6; --pink:#efd4d4;
+  --mint:#c8e6cd; --coral:#f3c9b6; --navy:#1f1d3d;
+  --magenta:#ff3d8b; --success:#1ea64a;
+  --sans:'Inter','Noto Sans KR','SF Pro Display',system-ui,helvetica,sans-serif;
+  --mono:'JetBrains Mono','SF Mono',menlo,monospace;
+}
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth}
+body{background:var(--canvas);color:var(--ink);font-family:var(--sans);
+  font-size:18px;font-weight:320;line-height:1.45;letter-spacing:-0.26px;
+  font-feature-settings:'kern';-webkit-font-smoothing:antialiased;word-break:keep-all}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:1280px;margin:0 auto;padding:0 48px}
+:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+
+/* ---- type roles ---- */
+.display-xl{font-size:clamp(48px,7.4vw,86px);font-weight:340;line-height:1.0;letter-spacing:-0.02em}
+.display-lg{font-size:clamp(38px,5vw,64px);font-weight:340;line-height:1.1;letter-spacing:-0.015em}
+.headline{font-size:26px;font-weight:540;line-height:1.35;letter-spacing:-0.26px}
+.subhead{font-size:26px;font-weight:340;line-height:1.35;letter-spacing:-0.26px}
+.body-lg{font-size:20px;font-weight:330;line-height:1.4;letter-spacing:-0.14px}
+.body-sm{font-size:16px;font-weight:330;line-height:1.45;letter-spacing:-0.14px}
+.eyebrow{font-family:var(--mono);font-size:15px;font-weight:400;line-height:1.3;
+  letter-spacing:0.54px;text-transform:uppercase}
+.caption{font-family:var(--mono);font-size:12px;font-weight:400;line-height:1.4;
+  letter-spacing:0.6px;text-transform:uppercase}
+b,strong{font-weight:540}
+
+/* ---- pills ---- */
+.pill{display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  font-family:var(--sans);font-size:18px;font-weight:480;line-height:1.4;
+  letter-spacing:-0.1px;border-radius:50px;padding:10px 22px;border:none;
+  cursor:pointer;transition:transform .12s}
+.pill:active{transform:scale(.98)}
+.pill-primary{background:var(--ink);color:var(--inverse-ink)}
+.pill-secondary{background:var(--canvas);color:var(--ink)}
+.pill-magenta{background:var(--magenta);color:#fff}
+.link{font-weight:480;letter-spacing:-0.1px;text-decoration:underline;text-underline-offset:4px}
+
+/* ---- nav ---- */
+.top-nav{position:sticky;top:0;background:var(--canvas);z-index:10;height:64px;
+  border-bottom:1px solid var(--hairline-soft)}
+.top-nav .wrap{height:100%;display:flex;align-items:center;justify-content:space-between}
+.logo{font-size:22px;font-weight:540;letter-spacing:-0.02em;display:flex;align-items:center;gap:10px}
+.logo .mark{width:22px;height:22px;border-radius:6px;background:var(--lilac);position:relative}
+.logo .mark::after{content:'';position:absolute;inset:5px;border-radius:3px;background:var(--ink)}
+.nav-links{display:flex;gap:28px;font-size:16px;font-weight:330;letter-spacing:-0.14px}
+.nav-links a:hover{opacity:.6}
+.nav-cta{display:flex;gap:10px;align-items:center}
+.nav-cta .pill{font-size:16px;padding:8px 18px}
+
+/* ---- marquee strip ---- */
+.marquee{background:var(--inverse);color:var(--inverse-ink);height:36px;
+  display:flex;align-items:center;overflow:hidden;white-space:nowrap}
+.marquee .inner{display:inline-flex;gap:56px;padding-left:100%;
+  animation:mq 28s linear infinite;font-size:14px;font-weight:330;letter-spacing:-0.1px}
+@keyframes mq{to{transform:translateX(-100%)}}
+@media(prefers-reduced-motion:reduce){.marquee .inner{animation:none;padding-left:48px}}
+
+/* ---- hero ---- */
+.hero{padding:112px 0 96px;text-align:center}
+.hero h1{text-wrap:balance}
+.hero .lede{max-width:620px;margin:32px auto 0}
+.hero .cta-row{display:flex;gap:12px;justify-content:center;margin-top:40px;flex-wrap:wrap}
+.hero .free-note{margin-top:20px;font-size:14px;font-weight:330}
+
+/* ---- hero mock: console on soft tile ---- */
+.mock{background:var(--soft);border-radius:24px;padding:48px;margin-top:80px;
+  display:grid;grid-template-columns:1.5fr 1fr;gap:24px;text-align:left}
+.panel{background:var(--canvas);border:1px solid var(--hairline);border-radius:8px;padding:24px;
+  display:flex;flex-direction:column;gap:14px}
+.panel .caption{color:var(--ink)}
+.field{border:1px solid var(--hairline);border-radius:8px;padding:12px 14px;font-size:15px;font-weight:330}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.stat{border:1px solid var(--hairline);border-radius:8px;padding:14px 16px}
+.stat .k{font-size:13px;font-weight:330;display:flex;align-items:center;gap:8px}
+.stat .v{font-size:26px;font-weight:540;letter-spacing:-0.02em;margin-top:4px}
+.stat .v small{font-size:13px;font-weight:330;letter-spacing:0}
+.swatch{width:10px;height:10px;border-radius:3px;display:inline-block}
+.sw-ok{background:var(--mint)}.sw-fit{background:var(--cream)}.sw-push{background:var(--coral)}.sw-reach{background:var(--pink)}
+.sticky-note{border-radius:6px;padding:18px 20px;font-size:14px;font-weight:330;line-height:1.5}
+.note-lime{background:var(--lime);transform:rotate(-1.2deg)}
+.note-lilac{background:var(--lilac);transform:rotate(1.4deg)}
+.note-cream{background:var(--cream);transform:rotate(-0.8deg)}
+.side-col{display:flex;flex-direction:column;gap:14px;justify-content:center}
+.side-col .caption{margin-bottom:2px}
+
+/* ---- sections ---- */
+.section{padding:96px 0}
+.sec-head{max-width:760px;margin-bottom:56px}
+.sec-head .eyebrow{margin-bottom:20px;display:block}
+.sec-head h2{text-wrap:balance}
+.sec-head .sub{margin-top:20px;font-size:20px;font-weight:330;letter-spacing:-0.14px;max-width:640px}
+
+/* ---- color blocks ---- */
+.block{border-radius:24px;padding:64px 48px}
+.block-lime{background:var(--lime)}
+.block-navy{background:var(--navy);color:var(--inverse-ink)}
+.block-cream{background:var(--cream)}
+.block-lilac{background:var(--lilac)}
+.block .inner{max-width:1080px;margin:0 auto}
+@media(max-width:768px){.block{border-radius:0;margin-left:-48px;margin-right:-48px;padding:56px 24px}}
+
+/* ---- backtest (lime) ---- */
+.bt-grid{display:grid;grid-template-columns:1.1fr 1fr;gap:64px;align-items:center}
+.bt-bars{display:flex;flex-direction:column;gap:16px}
+.bt-row{display:grid;grid-template-columns:56px 1fr 64px;align-items:center;gap:16px}
+.bt-lab{font-size:17px;font-weight:540}
+.bt-track{height:14px;border-radius:9999px;background:rgba(0,0,0,.10)}
+.bt-fill{height:100%;border-radius:9999px;background:var(--ink)}
+.bt-pct{font-size:19px;font-weight:540;text-align:right}
+.bt-cap{margin-top:8px}
+
+/* ---- three diagnoses ---- */
+.caps{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.cap{background:var(--soft);border-radius:8px;padding:32px;display:flex;flex-direction:column;gap:14px}
+.cap .eyebrow{font-size:13px}
+.cap h3{font-size:24px;font-weight:700;line-height:1.45;letter-spacing:0}
+.cap p{font-size:16px;font-weight:330;letter-spacing:-0.14px}
+
+/* ---- navy data block ---- */
+.navy-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:32px;margin-top:48px}
+.navy-stat .n{font-size:clamp(34px,4vw,52px);font-weight:340;letter-spacing:-0.02em;line-height:1}
+.navy-stat .n small{font-size:17px;font-weight:330}
+.navy-stat .l{font-size:15px;font-weight:330;margin-top:10px;color:rgba(255,255,255,.85)}
+.navy-notes{margin-top:48px;display:flex;flex-direction:column;gap:10px;
+  font-size:16px;font-weight:330;color:rgba(255,255,255,.85)}
+.navy-notes span::before{content:'—';margin-right:12px}
+
+/* ---- steps ---- */
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.step{border:1px solid var(--hairline);border-radius:24px;padding:24px 28px 28px;
+  display:flex;flex-direction:column;gap:12px}
+.step .caption{color:var(--ink)}
+.step h3{font-size:24px;font-weight:700;line-height:1.45}
+.step p{font-size:16px;font-weight:330;letter-spacing:-0.14px}
+.step ul{list-style:none;padding:14px 0 0;border-top:1px solid var(--hairline-soft);
+  display:flex;flex-direction:column;gap:8px;font-size:15px;font-weight:330}
+.step li{display:flex;gap:10px;align-items:baseline}
+.step li::before{content:'✓';color:var(--success);font-weight:540}
+
+/* ---- coverage (cream) ---- */
+.cov-groups{display:flex;flex-direction:column;gap:18px;font-size:17px;font-weight:330;max-width:900px}
+.cov-groups b{font-weight:540}
+.cov-note{margin-top:32px;font-size:15px;font-weight:330}
+
+/* ---- principles ---- */
+.rules{border-top:1px solid var(--hairline)}
+.rule{display:grid;grid-template-columns:64px 1fr auto;gap:24px;align-items:baseline;
+  padding:28px 0;border-bottom:1px solid var(--hairline)}
+.rule .no{font-family:var(--mono);font-size:14px;letter-spacing:.6px}
+.rule h3{font-size:22px;font-weight:540;letter-spacing:-0.2px}
+.rule p{font-size:16px;font-weight:330;letter-spacing:-0.14px;margin-top:8px;max-width:640px}
+.rule .tag{font-family:var(--mono);font-size:11px;letter-spacing:.6px;text-transform:uppercase;
+  border:1px solid var(--ink);border-radius:50px;padding:6px 14px;white-space:nowrap}
+
+/* ---- promo banner ---- */
+.promo{background:var(--lilac);border-radius:8px;padding:20px 28px;display:flex;
+  align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap}
+.promo p{font-size:16px;font-weight:330;letter-spacing:-0.14px}
+.promo b{font-weight:540}
+
+/* ---- final CTA (lime) ---- */
+.final .inner{text-align:center}
+.final h2{text-wrap:balance}
+.final .sub{margin:24px auto 0;max-width:520px;font-size:20px;font-weight:330;letter-spacing:-0.14px}
+.final .cta-row{display:flex;gap:12px;justify-content:center;margin-top:40px;flex-wrap:wrap}
+
+/* ---- footer ---- */
+footer{border-top:1px solid var(--hairline);padding:96px 0 64px}
+.foot-grid{display:grid;grid-template-columns:1.6fr 1fr 1fr;gap:48px}
+.foot-brand .wordmark{font-size:40px;font-weight:340;letter-spacing:-0.02em}
+.foot-brand p{font-size:15px;font-weight:330;margin-top:16px;max-width:340px}
+.foot-col .caption{display:block;margin-bottom:18px}
+.foot-col ul{list-style:none;padding:0;display:flex;flex-direction:column;gap:12px}
+.foot-col a{font-size:16px;font-weight:330;letter-spacing:-0.14px}
+.foot-col a:hover{opacity:.6}
+.foot-legal{margin-top:72px;padding-top:24px;border-top:1px solid var(--hairline-soft);
+  display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.foot-legal span{font-family:var(--mono);font-size:11px;letter-spacing:.6px;text-transform:uppercase}
+
+/* ---- responsive ---- */
+@media(max-width:1024px){
+  .caps,.steps{grid-template-columns:1fr}
+  .mock{grid-template-columns:1fr}
+  .bt-grid{grid-template-columns:1fr;gap:40px}
+  .navy-grid{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:768px){
+  .wrap{padding:0 24px}
+  .nav-links{display:none}
+  .hero{padding:72px 0 64px}
+  .mock{padding:24px}
+  .foot-grid{grid-template-columns:1fr}
+  .rule{grid-template-columns:44px 1fr}
+  .rule .tag{display:none}
+}
+@media(max-width:560px){
+  .hero .cta-row .pill,.final .cta-row .pill{width:100%}
+  .grid2{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<div class="top-nav">
+  <div class="wrap">
+    <a class="logo" href="#"><span class="mark"></span>대입네비</a>
+    <div class="nav-links">
+      <a href="#how">진단</a>
+      <a href="#trust">신뢰성</a>
+      <a href="#data">데이터</a>
+      <a href="#principles">원칙</a>
+      <a href="./about.html">이용 안내</a>
+    </div>
+    <div class="nav-cta">
+      <a class="pill pill-primary" href="#start">무료로 진단받기</a>
+    </div>
+  </div>
+</div>
+
+<div class="marquee" aria-hidden="true">
+  <div class="inner">
+    <span>지금은 무료 공개 기간 — 가입도 결제도 없습니다</span>
+    <span>62개 대학 · 16,058건 공식 입시결과</span>
+    <span>'안정' 판정 이듬해 유지율 89%</span>
+    <span>지금은 무료 공개 기간 — 가입도 결제도 없습니다</span>
+    <span>62개 대학 · 16,058건 공식 입시결과</span>
+    <span>'안정' 판정 이듬해 유지율 89%</span>
+  </div>
+</div>
+
+<main>
+
+  <div class="wrap hero">
+    <span class="eyebrow">ADMISSION NAVIGATION</span>
+    <h1 class="display-xl" style="margin-top:24px">대학이 발표한<br>진짜 입시결과로 진단합니다</h1>
+    <p class="lede body-lg">전국 62개 대학 입학처가 공식 공개한 16,000여 건의 합격선 데이터.
+    내신과 수능 예상 등급을 넣으면 안정·적정·도전·상향을 바로 알려드립니다.</p>
+    <div class="cta-row">
+      <a class="pill pill-primary" href="#start">무료로 진단받기</a>
+      <a class="pill pill-secondary" href="#trust" style="border:1px solid var(--hairline)">판정이 맞는지부터 보기</a>
+    </div>
+    <p class="free-note">회원가입 없음 · 결제 정보를 받지 않습니다</p>
+
+    <div class="mock">
+      <div class="panel">
+        <span class="caption">Diagnosis · 진단 예시</span>
+        <div class="field">내신 2.5등급 · 수능 예상 국3 수3 영2 탐3 · 부산 · 간호 계열</div>
+        <div class="grid2">
+          <div class="stat"><div class="k"><span class="swatch sw-ok"></span>안정</div><div class="v">27<small> 곳</small></div></div>
+          <div class="stat"><div class="k"><span class="swatch sw-fit"></span>적정</div><div class="v">19<small> 곳</small></div></div>
+          <div class="stat"><div class="k"><span class="swatch sw-push"></span>도전</div><div class="v">21<small> 곳</small></div></div>
+          <div class="stat"><div class="k"><span class="swatch sw-reach"></span>상향</div><div class="v">26<small> 곳</small></div></div>
+        </div>
+        <div class="field" style="font-size:14px">적정 예시 — 을지대 EU면접형 간호 2.88 · 가천대 가천바람개비 간호 2.88 · 조선대 서류전형 간호 2.87 …</div>
+      </div>
+      <div class="side-col">
+        <span class="caption">Why it works</span>
+        <div class="sticky-note note-lime"><b>공식 자료만</b> — 모든 합격선은 각 대학 입학처 발표 원문에서. 출처까지 기록합니다.</div>
+        <div class="sticky-note note-lilac"><b>자동 필터</b> — 지역인재 권역, 여자대학, 수능최저를 알아서 걸러냅니다.</div>
+        <div class="sticky-note note-cream"><b>3분이면 끝</b> — 리포트는 파일로 내려받아 보관하세요.</div>
+      </div>
+    </div>
+  </div>
+
+  <section class="wrap section" id="how">
+    <div class="sec-head">
+      <span class="eyebrow">01 — What you get</span>
+      <h2 class="display-lg">성적 하나로, 세 가지 진단</h2>
+      <p class="sub">내신·수능 예상 등급·지역·희망 계열만 입력하면 됩니다.</p>
+    </div>
+    <div class="caps">
+      <div class="cap">
+        <span class="eyebrow">Susi</span>
+        <h3>수시 지원선 판정</h3>
+        <p>내신을 각 대학 최종등록자 합격선(50·70·80%컷)과 대조해
+        안정·적정·도전·상향으로 분류합니다. 지역인재 권역, 여자대학,
+        수능최저까지 자동으로 반영합니다.</p>
+      </div>
+      <div class="cap">
+        <span class="eyebrow">Jeongsi</span>
+        <h3>정시 참고 판정</h3>
+        <p>수능 예상 등급을 백분위로 근사해 10개 대학의 정시 백분위
+        입결과 대조합니다. 군별·모집단위별 참고선을 한 표로 보여드립니다.</p>
+      </div>
+      <div class="cap">
+        <span class="eyebrow">Hakjong</span>
+        <h3>학생부 점검</h3>
+        <p>학생부 텍스트를 붙여넣으면 자율동아리·개인봉사·수상경력 등
+        대입 미반영 항목을 자동 경고하고, 24개 대학이 공표한
+        학종 평가요소 비율을 안내합니다.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="wrap" id="trust">
+    <div class="block block-lime">
+      <div class="inner">
+        <div class="bt-grid">
+          <div>
+            <span class="eyebrow">02 — Backtest</span>
+            <h2 class="display-lg" style="margin-top:20px">판정이 실제로 맞는지, 과거 데이터로 먼저 검증했습니다</h2>
+            <p style="margin-top:24px;font-size:18px;font-weight:330">2025학년도 합격선으로 내린 판정이
+            2026학년도 실제 결과에서 유지됐는지 전형·학과 <b>1,797쌍</b>으로 대조했습니다.
+            판정 등급이 실제 위험도 순서대로 정확히 벌어집니다.</p>
+            <p style="margin-top:16px;font-size:15px;font-weight:330">합격선의 연간 변동은 표준편차 ±0.7등급 —
+            '안정'도 확정 합격이 아니며, 변동이 큰 전형은 카드에 ⚡ 표시로 따로 경고합니다.</p>
+          </div>
+          <div class="bt-bars">
+            <div class="bt-row"><span class="bt-lab">안정</span><span class="bt-track"><span class="bt-fill" style="width:89%"></span></span><span class="bt-pct">89%</span></div>
+            <div class="bt-row"><span class="bt-lab">적정</span><span class="bt-track"><span class="bt-fill" style="width:75%"></span></span><span class="bt-pct">75%</span></div>
+            <div class="bt-row"><span class="bt-lab">도전</span><span class="bt-track"><span class="bt-fill" style="width:33%"></span></span><span class="bt-pct">33%</span></div>
+            <div class="bt-row"><span class="bt-lab">상향</span><span class="bt-track"><span class="bt-fill" style="width:13%"></span></span><span class="bt-pct">13%</span></div>
+            <span class="caption bt-cap">이듬해 합격권 유지율 · 내신 시나리오 5종 × 1,797쌍</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <section class="wrap section" id="start">
+    <div class="sec-head">
+      <span class="eyebrow">03 — How to use</span>
+      <h2 class="display-lg">이용 방법</h2>
+      <p class="sub">3분이면 끝납니다. 결과 리포트는 파일로 내려받아 보관할 수 있습니다.</p>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <span class="caption">Step 1</span>
+        <h3>성적 입력</h3>
+        <p>내신 평균 등급과 수능 예상 등급(국·수·영·탐), 거주 지역, 희망 계열을 고릅니다.</p>
+        <ul><li>회원가입 없음</li><li>'약대·컴공' 같은 약칭도 인식</li></ul>
+      </div>
+      <div class="step">
+        <span class="caption">Step 2</span>
+        <h3>진단 확인</h3>
+        <p>지원 자격이 있는 전형 목록과 판정별 지원선 카드를 확인합니다. 전체 카드는 표로 걸러볼 수 있습니다.</p>
+        <ul><li>수능최저 자동 판정</li><li>변동 큰 전형 ⚡ 경고</li></ul>
+      </div>
+      <div class="step">
+        <span class="caption">Step 3</span>
+        <h3>리포트 저장</h3>
+        <p>수시 판정·정시 참고·학종 평가요소가 담긴 진단 리포트를 내려받습니다.</p>
+        <ul><li>출처·방법론 명시</li><li>학생부 점검 결과 포함</li></ul>
+      </div>
+    </div>
+    <div style="margin-top:48px;display:flex;gap:16px;align-items:center;flex-wrap:wrap">
+      <a class="pill pill-primary" href="./app" data-app-link>지금 진단 시작하기</a>
+      <span class="body-sm">무료 공개 기간 · 결제 정보를 받지 않습니다</span>
+    </div>
+  </section>
+
+  <div class="wrap" id="data">
+    <div class="block block-navy">
+      <div class="inner">
+        <span class="eyebrow">04 — The data</span>
+        <h2 class="display-lg" style="margin-top:20px">쌓여 있는 것</h2>
+        <div class="navy-grid">
+          <div class="navy-stat"><div class="n">62<small> 개교</small></div><div class="l">공식 입결 확보 대학</div></div>
+          <div class="navy-stat"><div class="n">16,058<small> 건</small></div><div class="l">표준화된 합격선 데이터</div></div>
+          <div class="navy-stat"><div class="n">10<small> 개교</small></div><div class="l">정시 백분위 입결</div></div>
+          <div class="navy-stat"><div class="n">65<small> %</small></div><div class="l">최신 2026학년도 비중</div></div>
+        </div>
+        <div class="navy-notes">
+          <span>수도권 — 경희 · 한양 · 서강 · 이화 · 중앙 · 건국 · 동국 · 시립 · 국민 · 숭실 · 세종 · 광운 · 아주 · 인천 · 명지 등</span>
+          <span>거점국립 — 강원 · 충남 · 충북 · 전남 · 전북 · 경상국립 · 제주 / 여자대학 — 이화 · 숙명 · 성신 · 서울여 · 동덕 · 덕성</span>
+          <span>지역 주요 — 울산 · 조선 · 원광 · 순천향 · 호서 · 건양 · 한남 · 대전 · 경성 · 대구 · 대구가톨릭 등</span>
+        </div>
+        <p style="margin-top:40px;font-size:15px;font-weight:330;color:rgba(255,255,255,.7)">
+          미수록 대학(성균관·고려 등 12곳)은 해당 대학이 등급 데이터를 공개하지 않아서입니다 —
+          추정치로 채우지 않는 것이 원칙입니다.</p>
+      </div>
+    </div>
+  </div>
+
+  <section class="wrap section" id="principles">
+    <div class="sec-head">
+      <span class="eyebrow">05 — Principles</span>
+      <h2 class="display-lg">다섯 가지 수집 원칙</h2>
+      <p class="sub">진단의 신뢰는 데이터의 출처에서 나옵니다. 처음부터 지켜온 원칙입니다.</p>
+    </div>
+    <div class="rules">
+      <div class="rule">
+        <span class="no">01</span>
+        <div><h3>대학 입학처 공식 자료만 사용</h3>
+        <p>모든 합격선은 각 대학이 직접 발표한 입시결과·모집요강에서 가져옵니다.</p></div>
+        <span class="tag">Official only</span>
+      </div>
+      <div class="rule">
+        <span class="no">02</span>
+        <div><h3>제3자 사이트 크롤링 금지</h3>
+        <p>어디가·대학알리미 등 수집이 금지된 경로는 사용하지 않습니다.</p></div>
+        <span class="tag">No scraping</span>
+      </div>
+      <div class="rule">
+        <span class="no">03</span>
+        <div><h3>모든 수치에 출처 기록</h3>
+        <p>어떤 합격선이든 원문 PDF·게시물까지 역추적할 수 있게 계보를 남깁니다.</p></div>
+        <span class="tag">Traceable</span>
+      </div>
+      <div class="rule">
+        <span class="no">04</span>
+        <div><h3>추정으로 채우지 않음</h3>
+        <p>수능최저 등 기준은 요강 원문을 확인한 것만 기입합니다. 없으면 '수동 확인'으로 정직하게 표시합니다.</p></div>
+        <span class="tag">No guessing</span>
+      </div>
+      <div class="rule">
+        <span class="no">05</span>
+        <div><h3>불확실성을 있는 그대로</h3>
+        <p>백테스트 유지율과 연간 변동 폭을 리포트에 함께 고지합니다. '안정'은 확률이지 보장이 아닙니다.</p></div>
+        <span class="tag">Honest</span>
+      </div>
+    </div>
+    <div class="promo" style="margin-top:56px">
+      <p><b>지금은 무료 공개 기간</b> — 정식 오픈 전까지 모든 진단 기능을 제한 없이 쓸 수 있습니다.</p>
+      <a class="pill pill-magenta" href="#start">바로 진단하기</a>
+    </div>
+  </section>
+
+  <div class="wrap">
+    <div class="block block-lime final">
+      <div class="inner">
+        <span class="eyebrow">Free for now</span>
+        <h2 class="display-lg" style="margin-top:20px">지원선이 궁금하다면,<br>지금이 무료입니다</h2>
+        <p class="sub">가입도 결제도 없습니다. 성적을 넣고 3분 뒤 진단 리포트를 받아보세요.</p>
+        <div class="cta-row">
+          <a class="pill pill-primary" href="./app" data-app-link>무료로 진단받기</a>
+          <a class="pill pill-secondary" href="./about.html">이용 안내 보기</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <div class="wordmark">대입네비</div>
+        <p>전국 대학 공식 입시결과 기반 대입 진단 서비스.
+        현재 무료 공개 기간입니다.</p>
+      </div>
+      <div class="foot-col">
+        <span class="caption">Service</span>
+        <ul>
+          <li><a href="#how">세 가지 진단</a></li>
+          <li><a href="#trust">백테스트 신뢰성</a></li>
+          <li><a href="#data">데이터 커버리지</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <span class="caption">Info</span>
+        <ul>
+          <li><a href="#principles">수집 원칙</a></li>
+          <li><a href="./about.html">이용 안내 · 면책</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-legal">
+      <span>© 2026 대입네비 · Data: official university admissions</span>
+      <span>진단은 참고 자료입니다 — 지원 전 반드시 해당 대학 모집요강을 확인하세요</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
