@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""대입네비 진단 웹 앱(프로토타입) — Streamlit
+"""입시렌즈 진단 웹 앱(프로토타입) — Streamlit
 실행: streamlit run app.py
 입력(내신·수능·지역·희망계열·성별) → 수시/정시 진단 리포트 렌더.
 """
@@ -9,8 +9,8 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from engine.diagnose import Student, diagnose, MAJOR_SYNONYM
 from engine.report import render
 
-st.set_page_config(page_title='대입네비 진단', page_icon='🧭', layout='wide')
-st.title('🧭 대입네비 — 대입 진단 리포트')
+st.set_page_config(page_title='입시렌즈 진단', page_icon='🧭', layout='wide')
+st.title('🧭 입시렌즈 — 대입 진단 리포트')
 st.caption('전국 62개 대학 16,000여 건의 공식 입시결과(각 대학 입학처 발표)를 기반으로 한 진단입니다.')
 
 with st.sidebar:
