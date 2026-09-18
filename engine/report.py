@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""대입네비 진단 리포트 출력기 v1 — diagnose() 결과 → 학생용 마크다운 한 장 보고서
+"""프마드 진단 리포트 출력기 v1 — diagnose() 결과 → 학생용 마크다운 한 장 보고서
 사용: python3 engine/report.py  (샘플: 경영 3.2 인천)
      또는 from engine.report import render; md = render(diagnose(student))
 """

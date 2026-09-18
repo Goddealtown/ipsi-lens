@@ -1,0 +1,14 @@
+{
+  "name": "프마드｜FROM MY DREAM PROJECT",
+  "short_name": "프마드",
+  "description": "꿈에서 시작하는 개인 맞춤 진학설계",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#0C2441",
+  "lang": "ko",
+  "icons": [
+    {"src": "./assets/fmd_icon_192.png", "sizes": "192x192", "type": "image/png"},
+    {"src": "./assets/fmd_icon_512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable"}
+  ]
+}
